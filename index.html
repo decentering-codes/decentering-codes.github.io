@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ideas Peripheral</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  <link rel="stylesheet" type="text/css" href="fonts.css">
+  <link rel="stylesheet" href="org-style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <script type="text/javascript" src="rune.js"></script>
+</head>
+  </head>
+  <body>
+    <div class="container">
+      <div style="height: 35vw;" id="header">
+      <span class="glitch" data-text="IDEAS PERIPHERAL" style="position: absolute; padding-left: 3rem; top: 3rem; background: none; width: 80%">
+        IDEAS PERIPHERAL
+      </span> 
+
+      <img src="topo.png" height="100%" style="z-index: -1; border-bottom-right-radius: 5rem; background: pink; margin: 0; padding: auto">
+    </div>
+    </div>
+
+    <div id="buttons">
+    </div>
+    <div id="content">
+      <div id="org">
+      </div>
+      <div id="annotations">
+      </div>
+    </div>
+    <div class="container">
+      <div style="background: white; height: 5rem; border-top-right-radius: 5rem; margin-right: 15rem;"></div>
+    </div>
+    <div id="footer">
+      <script type="text/javascript" src="sketch.js"></script>
+    </div>
+  </body>
+</html>
+<script type="module">
+      import init, { parse } from './pkg/org_parser.js'
+      import { parseToDomElement } from './parser.js'
+      import { addStats } from './stats.js'
+      import { addToggleView, addSubButtonEvents } from './eventListeners.js'
+
+      async function run() {
+        await init()
+
+        let text
+        await fetch('./ideasperipheral.org', {
+          headers: new Headers({
+            'User-agent': 'Mozilla/4.0 Custom User Agent'
+          })
+        })
+        .then(response => response.text())
+        .then(data => {
+          text = data
+        })
+        .catch(error => console.error(error))
+
+        function addButtons(parent, branches) {
+          branches.forEach(branch => {
+            const button = document.createElement("input")
+            button.type = "button"
+            button.value = branch
+            button.id = branch
+            parent.appendChild(button)
+          })
+        }
+
+        const result = parse(text)
+
+        const topLevelBranches = Object.keys(result.children)
+        const buttons = document.querySelector('#buttons')
+        addButtons(buttons, topLevelBranches)
+
+        // const secondLevelBranches = Object.keys(result.children.Projects.children)
+        // const subButtons = document.querySelector('#subButtons')
+        // addButtons(subButtons, secondLevelBranches)
+
+        const dom = parseToDomElement(result.children.ASpeculativePractice, 0)
+        dom.className = "tree"
+
+        const parsedBranches = {}
+        parsedBranches.Projects = dom
+
+        document.querySelector(`#ASpeculativePractice`).className = 'active'
+
+        const space = document.querySelector('#org')
+        space.appendChild(dom)
+
+        if (space.childNodes.length == 2) {
+            space.removeChild(space.childNodes[0])
+        }
+
+        const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6")
+        addToggleView(elements)
+
+        const h3s = document.querySelectorAll('h3')
+        addStats(h3s)
+
+      }
+
+      run()
+    </script>

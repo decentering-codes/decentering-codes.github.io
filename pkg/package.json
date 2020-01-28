@@ -1,0 +1,15 @@
+{
+  "name": "org_parser",
+  "collaborators": [
+    "jskjott <jonathan@jskjott.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "org_parser_bg.wasm",
+    "org_parser.js",
+    "org_parser.d.ts"
+  ],
+  "module": "org_parser.js",
+  "types": "org_parser.d.ts",
+  "sideEffects": "false"
+}

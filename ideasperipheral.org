@@ -1,0 +1,19 @@
+#+TITLE: A speculative practice in life in the fringes 
+
+* A Speculative Practice
+** About
+*** The origin of decentering.codes is manifold.
+*** The initial inspiration for the project came from the concept of decentering in history - the practice of going against the grain of what is usually focussed on and empathised in historical sources and narratives. It is a call for not being captivated by the narratives mediated by power. 
+*** The idea of going off the stricken path to find insight which is profound and enriched by ideas peripheral.
+*** .codes hints at the medium of practice in the project - code, but also works to create a powerful visual - that of decentering coordinate points on a map. decentering.codes aims to live in the spaces in-between, in the margins, the moments which go unrecorded.
+*** The -ing form of the word was chosen to refer to how this project mainly is a practice.
+** Projects
+*** Git For Filmmakers
+**** A tool to do distributed filmmaking.
+**** [(git_for_filmmakers_aug21.png)]
+*** Space Annotator
+**** A tool for engaging critically with the physical world
+**** [(typewriter_1.png)]
+*** Webring Community
+**** A community space online
+**** [(rc_webring.png)]
