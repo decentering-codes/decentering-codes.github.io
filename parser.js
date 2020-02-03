@@ -26,20 +26,20 @@ const tokenParsers = {
   },
   Image: function(token){
 
-    let regex = new RegExp(/\[\((?<source>[^\]]+)\)\]/)
-    let match = token.lexeme.match(regex)
+    let regex = new RegExp(/\[\(([^\]]+)\)\]/)
+    let [, source] = token.lexeme.match(regex)
 
     var image = new Image()
     image.height = 200
-    image.src = match.groups.source
+    image.src = source
 
     return image
   },
   Comment: function(token){
     const innerElement = document.createElement('span')
 
-    let regex = new RegExp(/\[(?<source>[^\]]+)\]/)
-    let match = token.lexeme.match(regex)
+    let regex = new RegExp(/\[([^\]]+)\]/)
+    let [, match] = token.lexeme.match(regex)
 
     innerElement.className = 'sidenote'
     innerElement.textContent = token.lexeme
@@ -49,12 +49,12 @@ const tokenParsers = {
   Link: function(token){
     const innerElement = document.createElement('a')
     
-    let regex = new RegExp(/\[\[(?<url>[^\]]+)\]\[(?<text>[^\]]+)\]\]/)
+    let regex = new RegExp(/\[\[([^\]]+)\]\[([^\]]+)\]\]/)
 
-    let match = token.lexeme.match(regex)
+    let [, url, text] = token.lexeme.match(regex)
 
-    innerElement.setAttribute('href', match.groups.url)
-    innerElement.innerHTML = match.groups.text
+    innerElement.setAttribute('href', url)
+    innerElement.innerHTML = text
     innerElement.className = 'link'
 
     return innerElement

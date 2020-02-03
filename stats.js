@@ -14,9 +14,9 @@ export function addStats(hTags) {
         logEnd = timestamp[1].textContent
 
 
-        const regex = new RegExp(/^(?<year>[\d]{4})-(?<month>[\d]{2})-(?<day>[\d]{2}).+/)
+        const regex = new RegExp(/^(<[\d]{4})-([\d]{2})-([\d]{2}).+/)
       
-        const match = logEnd.match(regex)
+        const [, year, month, day] = logEnd.match(regex)
 
         const duration = stamp.querySelector(".duration").textContent
         const [hours, minutes] = duration.split(':')
@@ -28,30 +28,30 @@ export function addStats(hTags) {
           maxMinutes = logMinutes
         }
 
-        if (data[match.groups.year]) {
-          if (data[match.groups.year][match.groups.month]) {
-            data[match.groups.year][match.groups.month][match.groups.day] = logMinutes
+        if (data[year]) {
+          if (data[year][month]) {
+            data[year][month][day] = logMinutes
           } else {
 
             const entry = { 
-             [match.groups.day]: logMinutes
+             [day]: logMinutes
             }
 
-            data[match.groups.year][match.groups.month] = entry
+            data[year][month] = entry
 
           }
         } else {
 
           const entry = {
-            [match.groups.month]: {
-             [match.groups.day]: logMinutes
+            [month]: {
+             [day]: logMinutes
             }
           }
 
-          data[match.groups.year] = entry
+          data[year] = entry
         }
 
-        data[match.groups.year]
+        data[year]
 
         totalMinutes = totalMinutes + logMinutes
       }

@@ -21,7 +21,7 @@ r.text('(*^^*)♡', width * 0.92, height * 0.9).fontFamily('mononoki_bold').stro
 
 r.on('update', function(mouse) {
 	paths.forEach((path, i) => {
-		if (path.state.y > height) {
+		if (path.state.y > height + 10) {
 			path.move(0,-height,true)
 		} else {
 			path.move(0,1,true)

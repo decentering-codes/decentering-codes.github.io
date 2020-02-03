@@ -151,15 +151,15 @@ input {
 }
 
 .todo {
-	background-color: lightpink;
+	background-color: white;
 }
 
 .deadline {
-	background-color: lightpink;
+	background-color: white;
 }
 
 .scheduled {
-	background-color: lightpink;
+	background-color: white;
 }
 
 .datestamp {
